@@ -22,7 +22,7 @@ Under `Simulation/`, we have four independent simulation scenarios, but they sha
 
 ## Simulation 
 <img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Simulation_Design_DAGs.png" width=800>
-We present both the directed acyclic graph (DAG) in discrete-time and the multistate model diagram in continuous-time to demonstrate the simulation desing. 
+We present both the directed acyclic graph (DAG) in discrete-time and the multistate model diagram in continuous-time to demonstrate the simulation design. 
 
 ### The four simulation scenarios
 
@@ -71,12 +71,12 @@ Simulation results are presented in tables. The mean, variance, MSE, coverage, a
 The simulation methods are further developed and demonstrated in a new chronic glucocorticoid user cohort study over a 20-year period, with two time-dependent confounders - long-term-care (LTC) residency and bisphosphonate (BP) therapy duration. The outcome of interest is time-to-fracture. For exposure data, given the large sample size (86,842 patients) and the requirement of long-format dataset (split each individual's follow-up period by ordered person-times from all patients) in longitudinal survival analysis, we decide to use a discrete approximation of a five-day interval for slicing. The visit status are coded if there is a dose level change.
 
 #### Requirement
-Required R pacakges are `library(survival)`, `library(plyr)`, `library(dplyr)`, `library(stringr)`, `library(splines)`, `library(survey)`, `library(tableone)`, `library(MASS)`, `library(xtable)`, `library(forestplot)`, `library(Hmisc)`, `library(tidyverse)`, `library(ggplot2)`, and `library(lmtest)`.  A R version of 3.5.2 or above and the packages version as recent as possible are recommened. 
+Required R packages are `library(survival)`, `library(plyr)`, `library(dplyr)`, `library(stringr)`, `library(splines)`, `library(survey)`, `library(tableone)`, `library(MASS)`, `library(xtable)`, `library(forestplot)`, `library(Hmisc)`, `library(tidyverse)`, `library(ggplot2)`, and `library(lmtest)`.  A R version of 3.5.2 or above and the packages version as recent as possible are recommended. 
 
 #### Fake Dataset
 Initial data cleaning steps are implemented in SAS (data and code not presented due to confidentiality), but here are some highlights:
 1. We systematically cleaned the error-prone BP days-supply values based on peer-reviewed guidelines.
-2. We contructed the non-overlapping treatment and confounder episodes by shifting forward the overlap duration and all subsequent dispensations or truncating the current dispensation duration, depending on whether the overlap is <= 30 days or not.
+2. We constructed the non-overlapping treatment and confounder episodes by shifting forward the overlap duration and all subsequent dispensations or truncating the current dispensation duration, depending on whether the overlap is <= 30 days or not.
 3. We derived fracture outcome by considering a 90 day washout period. 
 
 For the purpose of demonstration, under 'DataAnalysis/Fake_Data_Workflow/', `SAS_cleaning_demo.sas` is the code used to create and clean the exposure data, and `GC_FINAL.csv` shows how the exposure dispensation looks like. Then, the other `.R` files read the `GC_FINAL.csv` into R and generate the long-format dataset needed for modeling. 
@@ -85,7 +85,7 @@ For the purpose of demonstration, under 'DataAnalysis/Fake_Data_Workflow/', `SAS
 The files in `DataAnalysis/Real_Data_Final_Workflow/` are the actual R code used for data cleaning, manipulation, visualization, modeling, diagnostic, and potential outcome prediction. 
 `FINAL_WORKFLOW.R` is the master file that controls the sourcing of all lower level files. We start with reading in the baseline, exposure, and confounder `.csv` files by `Level4_Clean.R`. Several descriptive results can be returned with `Table1.R` and `Death_Fx_Time_plot.R`. Then, we generate the five-day interval long-format exposure dataset by `Exposure_dataset.R`, and fit the exposure models separately for female and male in `Exposure_models_female.R` or `Exposure_models.R`. (The commented out files `Exposure_models_female_nonum.R` or `Exposure_models_nonum.R` only differ by removing baseline covariates from the marginal model (numerator of stabilized weights), and we use these two files to get the exposure models needed for standardized mean difference (SMD) diagnostics plots [3] at baseline only.)
 
-Afterwards, we can save the exposure model outputs as tables and forestplots by running the automated files on `Model_Outputs_names.R` and `Model_Outputs.R`. We then generate the case-base sampled long-format outcome dataset by `Outcome_dataset.R`. After the exposure weights are predicted and mapped over to the outcome dataset, we can perform the diagnostics of generating the stabilized weights distribution and as a function over time plots in `Diagnostics.R`. Then, the time-dependent SMD plots over three time points can be plotted with `DiagnosticSMD.R`. 
+Afterwards, we can save the exposure model outputs as tables and forest plots by running the automated files on `Model_Outputs_names.R` and `Model_Outputs.R`. We then generate the case-base sampled long-format outcome dataset by `Outcome_dataset.R`. After the exposure weights are predicted and mapped over to the outcome dataset, we can perform the diagnostics via generating the stabilized weights distribution and as a function over time plots in `Diagnostics.R`. Then, the time-dependent SMD plots over three time points can be plotted with `DiagnosticSMD.R`. 
 
 We can then fit the outcome models by `Outcome_models.R`, and return the outcome model output tables by running `Model_Outputs.R` again. Then the descriptive hazard plot and potential hazard data set construction and plots are returned by `Hazard_over_time_plt.R`. 
 
