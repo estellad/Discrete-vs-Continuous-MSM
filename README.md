@@ -21,7 +21,7 @@ Under `Simulation/`, we have four independent simulation scenarios, but they sha
 &nbsp;
 
 ## Simulation 
-<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Simulation_Design_DAGs.png" width=500>
+<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Simulation_Design_DAGs.png" width=800>
 We present both the directed acyclic graph (DAG) in discrete-time and the multistate model diagram in continuous-time to demonstrate the simulation desing. 
 
 ### The four simulation scenarios
@@ -30,10 +30,10 @@ We present both the directed acyclic graph (DAG) in discrete-time and the multis
 A scenario that patients all start unexposed, and then start the treatment at some individual-specific time point. *A_i(t)* or *A_{ik}* can be interpret as a treatment initiation process, in continuous and discrete time, respectively. *X_i(t)* or *X_{ik}* is the confounder process, and *Y* is the time-to-event outcome. 
 
 We start with state 1, and then depending on the treatment or confounder or event process taken, the individual can move across different states within administrative censoring of 5 years, with probabilities specified in a transition matrix. 
-<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim1_multistate.png" width=500>
+<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim1_multistate.png" width=300>
 
 For simualtion 1 and 2, we have the below cross tabulation of exposure weighting and outcome MSM model combinations:
-<img align = "center" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim12_crosstab.png" width=500>
+<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim12_crosstab.png" width=500>
 
 #### Simulation 2: treatment stop
 In scenario 2, we simulate a reversed situation of scenario 1. With the new-user cohort design of interest, we have *A_i(0) = a_{i0} = 1* so that everyone starts exposed, and then a change in visit status results in a stop of treatment.
@@ -43,18 +43,19 @@ In scenario 2, we simulate a reversed situation of scenario 1. With the new-user
 #### Simulation 3: treatment stop, model as logistic single visit MPP
 Similar to the second scenario, all patients start with being on treatment, but we separate the modeling of exposure process *A_i(t)* into a visit process *V_i(t)* that induces the corresponding treatment assignment indicator *D_i(t)*, where the dosage level is binary, indicating treatment stopping or continuation on the same treatment. 
 
-For simualtion 3 and 4, we have the below cross tabulation of model combinations and the combined weights:
-<img align = "center" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim34_crosstab.png" width=500>
+For simualtion 3 and 4, we have the below cross tabulation of model combinations:
+<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim34_crosstab.png" width=500>
 
-<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/combined_sw_sim.png" width=100>
+For MPP, the combined weights is the product of stabilized weights from the visiting and dosage models. 
+<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/combined_sw_sim.png" width=200>
 
 #### Simulation 4: treatment stop, model as a multinomial single visit MPP
 
-Similar to the second and third scenario, all patients start with on treatment, with some initial dose *D_{i0}* sampled from a logistic model. We also separate the modelling of $A_i(t)$ into $V_i(t)$ and *D_i(t)*, but we extend the dosage level to three categories, indicating stop treatment, or continue on the same treatment or change to a higher dose treatment. We use a multinomial model for the modeling of *D_i(t)*. 
+Similar to the second and third scenario, all patients start with on treatment, with some initial dose *D_{i0}* sampled from a logistic model. We also separate the modelling of <img src="https://latex.codecogs.com/gif.latex?A_i(t)"/> into $V_i(t)$ and *D_i(t)*, but we extend the dosage level to three categories, indicating stop treatment, or continue on the same treatment or change to a higher dose treatment. We use a multinomial model for the modeling of *D_i(t)*. 
 
 ### Simulation parameters
 The main simulation parameters can be changed in the `helper_.R` files under each scenario. We require keeping the discrete and continuous-time parameters the same for the sake of comparison. As a summary of the simulation parameters used in the above four scenarios, we have 
-<img align = "center" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Simulation_Parameters.png" width=500>
+<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Simulation_Parameters.png" width=500>
 
 ### Result
 Simulation results are presented in tables. The mean, variance, MSE, coverage, and other statistical features are similar across different combinations, but case-base sampling effectively shortened the runtime to 1/5 of that of Cox model. 
@@ -85,9 +86,8 @@ Afterwards, we can save the exposure model outputs as tables and forestplots by 
 We can then fit the outcome models by `Outcome_models.R`, and return the outcome model output tables by running `Model_Outputs.R` again. Then the descriptive hazard plot and potential hazard data set construction and plots are returned by `Hazard_over_time_plt.R`. 
 
 ### Weighting
-The combined weighting function is the cumulative product of stabilized (marginal divided by conditional) weights from the intial dose assignment, the subsequent visiting, and the subsequent dose assignment model.
-<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/AnalysisDesign/combined_sw.png" width=100>
-Depending on if an individual is getting a new dispensation during follow-up, the visiting and dosage weights can be muted, but the baseline weights always exist.
+The combined weighting function is the cumulative product of stabilized (marginal divided by conditional) weights from the intial dose assignment, the subsequent visiting, and the subsequent dose assignment model. Depending on if an individual is getting a new dispensation during follow-up, the visiting and dosage weights can be muted, but the baseline weights always exist.
+<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/AnalysisDesign/combined_sw.png" width=200>
 
 ### Result
 After using weighting to remove time-dependent confounders, several baseline characteristics are predictive for fracture. In terms of potential hazard under always treated with each dose level, 30-50mg daily has the highest impact on fracture. The impact of GC on fracture has the steepest escalation during the first 30 days and starts to reach a plateau after 3 months, with a slight increase near the end of the one year follow-up.
