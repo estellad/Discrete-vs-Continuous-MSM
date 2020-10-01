@@ -38,16 +38,17 @@ For simualtion 1 and 2, we have the below cross tabulation of exposure weighting
 #### Simulation 2: treatment stop
 In scenario 2, we simulate a reversed situation of scenario 1. With the new-user cohort design of interest, we have <img src="https://latex.codecogs.com/gif.latex?A_i(0) = a_{i0} = 1"/> so that everyone starts exposed, and then a change in visit status results in a stop of treatment.
 
-<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim234_multistate.png" width=300>
+<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim234_multistate.png" width=250>
 
 #### Simulation 3: treatment stop, model as logistic single visit MPP
-Similar to the second scenario, all patients start with being on treatment, but we separate the modeling of exposure process <img src="https://latex.codecogs.com/gif.latex?A_i(t)"/> into a visit process <img src="https://latex.codecogs.com/gif.latex?V_i(t)/> that induces the corresponding treatment assignment indicator <img src="https://latex.codecogs.com/gif.latex?D_i(t)"/>, where the dosage level is binary, indicating treatment stopping or continuation on the same treatment. 
+Similar to the second scenario, all patients start with being on treatment, but we separate the modeling of exposure process <img src="https://latex.codecogs.com/gif.latex?A_i(t)"/> into a visit process <img src="https://latex.codecogs.com/gif.latex?V_i(t)"/> that induces the corresponding treatment assignment indicator <img src="https://latex.codecogs.com/gif.latex?D_i(t)"/>, where the dosage level is binary, indicating treatment stopping or continuation on the same treatment. 
 
 For simualtion 3 and 4, we have the below cross tabulation of model combinations:
 <img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim34_crosstab.png" width=500>
 
 For MPP, the combined weights is the product of stabilized weights from the visiting and dosage models. 
-<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/combined_sw_sim.png" width=200>
+
+<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/combined_sw_sim.png" width=250>
 
 #### Simulation 4: treatment stop, model as a multinomial single visit MPP
 
@@ -56,7 +57,9 @@ Similar to the second and third scenario, all patients start with on treatment, 
 ### Simulation parameters
 The main simulation parameters can be changed in the `helper_.R` files under each scenario. We require keeping the discrete and continuous-time parameters the same for the sake of comparison. As a summary of the simulation parameters used in the above four scenarios, we have 
 
-<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Simulation_Parameters.png" width=700>
+<p align="center">
+  <img width=500 src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Simulation_Parameters.png">
+</p>
 
 ### Result
 Simulation results are presented in tables. The mean, variance, MSE, coverage, and other statistical features are similar across different combinations, but case-base sampling effectively shortened the runtime to 1/5 of that of Cox model. 
@@ -65,7 +68,7 @@ Simulation results are presented in tables. The mean, variance, MSE, coverage, a
 
 ## Data Analysis
 <img align = "right" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/AnalysisDesign/analysis_approach.png" width=500>
-The above methods are further developed and demonstrated in a new chronic glucocorticoid user cohort study over a 20-year period, with two time-dependent confounders - long-term-care (LTC) residency and bisphosphonate (BP) therapy duration. The outcome of interest is time-to-fracture. For exposure data, given the large sample size (86,842 patients) and the requirement of long-format dataset (split each individual's follow-up period by ordered person-times from all patients) in longitudinal survival analysis, we decide to use a discrete approximation of a five-day interval for slicing. The visit status are coded if there is a dose level change.
+The simulation methods are further developed and demonstrated in a new chronic glucocorticoid user cohort study over a 20-year period, with two time-dependent confounders - long-term-care (LTC) residency and bisphosphonate (BP) therapy duration. The outcome of interest is time-to-fracture. For exposure data, given the large sample size (86,842 patients) and the requirement of long-format dataset (split each individual's follow-up period by ordered person-times from all patients) in longitudinal survival analysis, we decide to use a discrete approximation of a five-day interval for slicing. The visit status are coded if there is a dose level change.
 
 #### Requirement
 Required R pacakges are `library(survival)`, `library(plyr)`, `library(dplyr)`, `library(stringr)`, `library(splines)`, `library(survey)`, `library(tableone)`, `library(MASS)`, `library(xtable)`, `library(forestplot)`, `library(Hmisc)`, `library(tidyverse)`, `library(ggplot2)`, and `library(lmtest)`.  A R version of 3.5.2 or above and the packages version as recent as possible are recommened. 
@@ -89,7 +92,7 @@ We can then fit the outcome models by `Outcome_models.R`, and return the outcome
 ### Weighting
 The combined weighting function is the cumulative product of stabilized (marginal divided by conditional) weights from the intial dose assignment, the subsequent visiting, and the subsequent dose assignment model. Depending on if an individual is getting a new dispensation during follow-up, the visiting and dosage weights can be muted, but the baseline weights always exist.
 
-<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/AnalysisDesign/combined_sw.png" width=300>
+<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/AnalysisDesign/combined_sw.png" width=500>
 
 ### Result
 After using weighting to remove time-dependent confounders, several baseline characteristics are predictive for fracture. In terms of potential hazard under always treated with each dose level, 30-50mg daily has the highest impact on fracture. The impact of GC on fracture has the steepest escalation during the first 30 days and starts to reach a plateau after 3 months, with a slight increase near the end of the one year follow-up.
