@@ -1,6 +1,6 @@
 # This is over 50 rounds of simulations.
 # each round is documented in Marginal.R
-rm(list=ls())
+#rm(list=ls())
 library(parallel)
 
 expit <- function(x) {1/(1+exp(-x))}
