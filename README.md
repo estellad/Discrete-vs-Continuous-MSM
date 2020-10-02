@@ -16,7 +16,7 @@ This repository contains the source code to perform simulation studies with vari
 Several `R` packages need to be installed and loaded for the simulation study. In the data generation and single seed simulation phase, we need `library(survival)`, `library(splines)`, and `library(dplyr)`. Afterwards, we need `library(parallel)` to perform parallel computing on a Windows system (commented code also available for Mac/OS). Depending on the scenario or time-scale, one simulation study might take up to eleven hours to run, even with parallel setting. 
 
 #### Explanation of the file structure
-Under `Simulation/`, we have four independent simulation scenarios, but they share the same structure and naming convention. The directory `Simulation/Sim1` contains the files `helper_sim1.R`, `Marginal_sim1.R`, and `Marginal_sim1_repeat.R` for continuous-time exposure models, and `helper_sim1_slm.R`, `Marginal_sim1_slm.R`, and `Marginal_sim1_repeat_slm.R` for discrete models. These set of three files documents the data generating algorithm, the single iteration of simulation, and the repeated 1,000 rounds of simulations running on parallel cores to speed up computing time. Besides, the two '.q' files are called for case-base sampling robust sandwich variance estimator in both settings [1]. The `marginalrate_simple.r` documents the numerical integration needed to check the true simulation parameter value [2]. 
+Under `Simulation/`, we have four independent simulation scenarios, but they share the same structure and naming convention. The directory `Simulation/Sim1` contains the files `helper_sim1.R`, `Marginal_sim1.R`, and `Marginal_sim1_repeat.R` for continuous-time exposure models, and `helper_sim1_slm.R`, `Marginal_sim1_slm.R`, and `Marginal_sim1_repeat_slm.R` for discrete models. These set of three files documents the data generating algorithm, the single iteration of simulation, and the repeated 1,000 rounds of simulations running on parallel cores to speed up computing time. Besides, the two `.q` files are called for case-base sampling robust sandwich variance estimator in both settings [1]. The `marginalrate_simple.r` documents the numerical integration needed to check the true simulation parameter value [2]. 
 
 &nbsp;
 
@@ -73,13 +73,13 @@ The simulation methods are further developed and demonstrated in a new chronic g
 #### Requirement
 Required R packages are `library(survival)`, `library(plyr)`, `library(dplyr)`, `library(stringr)`, `library(splines)`, `library(survey)`, `library(tableone)`, `library(MASS)`, `library(xtable)`, `library(forestplot)`, `library(Hmisc)`, `library(tidyverse)`, `library(ggplot2)`, and `library(lmtest)`.  A R version of 3.5.2 or above and the packages version as recent as possible are recommended. 
 
-#### Fake Dataset
+#### Demo Dataset
 Initial data cleaning steps are implemented in SAS (data and code not presented due to confidentiality), but here are some highlights:
 1. We systematically cleaned the error-prone BP days-supply values based on peer-reviewed guidelines.
 2. We constructed the non-overlapping treatment and confounder episodes by shifting forward the overlap duration and all subsequent dispensations or truncating the current dispensation duration, depending on whether the overlap is <= 30 days or not.
 3. We derived fracture outcome by considering a 90 day washout period. 
 
-For the purpose of demonstration, under 'DataAnalysis/Fake_Data_Workflow/', `SAS_cleaning_demo.sas` is the code used to create and clean the exposure data, and `GC_FINAL.csv` shows how the exposure dispensation looks like. Then, the other `.R` files read the `GC_FINAL.csv` into R and generate the long-format dataset needed for modeling. 
+For the purpose of demonstration, under `DataAnalysis/Fake_Data_Workflow/`, `SAS_cleaning_demo.sas` is the code used to create and clean the exposure data, and `GC_FINAL.csv` shows how the exposure dispensation looks like. Then, the other `.R` files read the `GC_FINAL.csv` into R and generate the long-format dataset needed for modeling. 
 
 #### Explanation of the file structure
 The files in `DataAnalysis/Real_Data_Final_Workflow/` are the actual R code used for data cleaning, manipulation, visualization, modeling, diagnostic, and potential outcome prediction. 
