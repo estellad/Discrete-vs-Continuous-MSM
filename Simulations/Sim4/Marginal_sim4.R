@@ -352,27 +352,27 @@ marginalnew_one_round <- function(seed, m, nobs, states, trates, tlim){
 
   # ## Cox Outcome on A Model
   # # Only V Poisson model
-  # coxout_Vpoi_ctm <- coxph(Surv(start, stop, Yevent) ~ A + timebasisa0_cox #+ timebasisa2_cox
+  # coxout_Vpoi_ctm <- coxph(Surv(start, stop, Yevent) ~ A + timebasisa0_cox + Dprev #+ timebasisa2_cox
   #                          + cluster(idx), weight=iptw, data=long_Y_ctm, control = coxph.control(timefix=FALSE))
   # 
   # # Only V Cox model
-  # coxout_Vcox_ctm <- coxph(Surv(start, stop, Yevent) ~ A + timebasisa0_cox #+ timebasisa2_cox
+  # coxout_Vcox_ctm <- coxph(Surv(start, stop, Yevent) ~ A + timebasisa0_cox + Dprev #+ timebasisa2_cox
   #                          + cluster(idx), weight=sw_cox, data=long_Y_ctm, control = coxph.control(timefix=FALSE))
   # 
   # # Only D Logistic model
-  # coxout_Dlogi_ctm <- coxph(Surv(start, stop, Yevent) ~ A + timebasisa0_cox #+ timebasisa2_cox
+  # coxout_Dlogi_ctm <- coxph(Surv(start, stop, Yevent) ~ A + timebasisa0_cox + Dprev #+ timebasisa2_cox
   #                           + cluster(idx), weight=sw_logi_d, data=long_Y_ctm, control = coxph.control(timefix=FALSE))
   # 
   # # V D Combined Poisson * Logistic Model
-  # coxout_VpoiDlogi_ctm <- coxph(Surv(start, stop, Yevent) ~ A + timebasisa0_cox #+ timebasisa2_cox
+  # coxout_VpoiDlogi_ctm <- coxph(Surv(start, stop, Yevent) ~ A + timebasisa0_cox + Dprev #+ timebasisa2_cox
   #                               + cluster(idx), weight=sw_poi_a, data=long_Y_ctm, control = coxph.control(timefix=FALSE))
   # 
   # # V D Combined Cox * Logistic Model
-  # coxout_VcoxDlogi_ctm <- coxph(Surv(start, stop, Yevent) ~ A + timebasisa0_cox #+ timebasisa2_cox
+  # coxout_VcoxDlogi_ctm <- coxph(Surv(start, stop, Yevent) ~ A + timebasisa0_cox + Dprev #+ timebasisa2_cox
   #                               + cluster(idx), weight=sw_cox_a, data=long_Y_ctm, control = coxph.control(timefix=FALSE))
   # 
   # # Unweighted
-  # coxout_unweight_ctm <- coxph(Surv(start, stop, Yevent) ~ A + timebasisa0_cox #+ timebasisa2_cox
+  # coxout_unweight_ctm <- coxph(Surv(start, stop, Yevent) ~ A + timebasisa0_cox + Dprev #+ timebasisa2_cox
   #                              + cluster(idx), data=long_Y_ctm, control = coxph.control(timefix=FALSE))
   # 
   # # For parameter A=0
@@ -406,27 +406,27 @@ marginalnew_one_round <- function(seed, m, nobs, states, trates, tlim){
 
   # Case-base Outcome Models
   # Only V poisson
-  cbout_Vpoi_ctm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb #+ timebasisa2_cb 
+  cbout_Vpoi_ctm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb + Dprev #+ timebasisa2_cb 
                         + offset(log(futime)), family=binomial(link=logit), weights=iptw, data=casebase)
 
   # Only V cox
-  cbout_Vcox_ctm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb #+ timebasisa2_cb 
+  cbout_Vcox_ctm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb + Dprev #+ timebasisa2_cb 
                         + offset(log(futime)), family=binomial(link=logit), weights=sw_cox, data=casebase)
 
   # Only D logistic
-  cbout_Dlogi_ctm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb #+ timebasisa2_cb 
+  cbout_Dlogi_ctm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb + Dprev #+ timebasisa2_cb 
                          + offset(log(futime)), family=binomial(link=logit), weights=sw_logi_d, data=casebase)
 
   # V * D combined: poisson * logistic
-  cbout_VpoiDlogi_ctm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb #+ timebasisa2_cb 
+  cbout_VpoiDlogi_ctm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb + Dprev #+ timebasisa2_cb 
                              + offset(log(futime)), family=binomial(link=logit), weights=sw_poi_a, data=casebase)
 
   # V * D combined: cox * logistic
-  cbout_VcoxDlogi_ctm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb #+ timebasisa2_cb 
+  cbout_VcoxDlogi_ctm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb + Dprev #+ timebasisa2_cb 
                              + offset(log(futime)), family=binomial(link=logit), weights=sw_cox_a, data=casebase)
 
   # Unweighted
-  cbout_unweight_ctm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb #+ timebasisa2_cb 
+  cbout_unweight_ctm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb + Dprev #+ timebasisa2_cb 
                             + offset(log(futime)), family=binomial(link=logit), data=casebase)
 
   # For parameter A=0
