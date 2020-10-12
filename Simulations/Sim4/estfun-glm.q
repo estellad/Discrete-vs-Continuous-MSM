@@ -15,7 +15,7 @@ estfun.glm <- function(glm.obj)
 	else {
 		mf <- model.frame(glm.obj)
 		xmat <- model.matrix(terms(glm.obj), mf)
-	}
+	} 
 ##
 # Calculate variance weight and residual (Y-fitted)
 ##
