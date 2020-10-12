@@ -291,16 +291,20 @@ marginalnew_one_round <- function(seed, m, nobs, states, trates, tlim){
   # Case-base Outcome Models
   # Only V cox
   cbout_Vlogi_slm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb + Dprev #+ timebasisa2_cb 
-                        + offset(log(futime)), family=binomial(link=logit), weights=sw_logi, data=casebase)
+                        #+ offset(log(futime))
+                        , family=binomial(link=logit), weights=sw_logi, data=casebase)
   # Only D logistic
   cbout_Dlogi_slm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb + Dprev #+ timebasisa2_cb 
-                         + offset(log(futime)), family=binomial(link=logit), weights=sw_logi_d, data=casebase)
+                         #+ offset(log(futime))
+                         , family=binomial(link=logit), weights=sw_logi_d, data=casebase)
   # V * D combined: poisson * logistic
   cbout_VlogiDlogi_slm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb + Dprev #+ timebasisa2_cb 
-                             + offset(log(futime)), family=binomial(link=logit), weights=sw_logilogi_a, data=casebase)
+                             #+ offset(log(futime))
+                             , family=binomial(link=logit), weights=sw_logilogi_a, data=casebase)
   # Unweighted
   cbout_unweight_slm <- glm(Yevent ~ timebasis_cb + A + timebasisa0_cb + Dprev #+ timebasisa2_cb 
-                            + offset(log(futime)), family=binomial(link=logit), data=casebase)
+                            #+ offset(log(futime))
+                            , family=binomial(link=logit), data=casebase)
   
   # For parameter A=0
   pointest[5] <- coef(cbout_Vlogi_slm)[4]
