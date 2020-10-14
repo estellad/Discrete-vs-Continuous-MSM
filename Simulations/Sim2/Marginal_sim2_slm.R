@@ -117,7 +117,7 @@ marginalnew_one_round <- function(seed, m, nobs, states, trates, tlim){
       casebase$start[idx] <- c(0,casebase$stop[idx][1:(length(casebase$stop[idx])-1)])
     }
   }
-  casebase$futime <- casebase$stop - casebase$start                   # non-universal futime
+  casebase$futime <- sum(ftime)/ms             # universal futime
   casebase$month <- findInterval(casebase$stop, c(0,dtimes_A))
   
   timebasis_cb <- bs(casebase$stop, Boundary.knots=c(0, tlim), degree=2)
@@ -173,11 +173,13 @@ marginalnew_one_round <- function(seed, m, nobs, states, trates, tlim){
   
   ## Case-base Outcome Models
   casebase$notA <- as.numeric(!(casebase$Aexpo))
-  cbout_logi_ctm <- glm(Yevent ~ timebasis_cb + notA + timebasisa_cb + offset(log(futime)), family=binomial(link=logit), weights=sw_logi, data=casebase)
+  cbout_logi_ctm <- glm(Yevent ~ timebasis_cb + notA + timebasisa_cb + offset(log(futime))
+                        , family=binomial(link=logit), weights=sw_logi, data=casebase)
   pointest[3] <- coef(cbout_logi_ctm)[4]
   varest[3] <- diag(infjack.glm(cbout_logi_ctm, casebase$idx))[4]
   
-  cbout_unweight_ctm <- glm(Yevent ~ timebasis_cb + notA + timebasisa_cb + offset(log(futime)), family=binomial(link=logit), data=casebase)
+  cbout_unweight_ctm <- glm(Yevent ~ timebasis_cb + notA + timebasisa_cb + offset(log(futime))
+                            , family=binomial(link=logit), data=casebase)
   pointest[4] <- coef(cbout_unweight_ctm)[4]
   varest[4] <- diag(vcov(cbout_unweight_ctm))[4]
   

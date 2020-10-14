@@ -169,13 +169,13 @@ results <- cbind(colMeans(pointestall),
                  colMeans(pointestall) - rep(input_coef,m), # Bias # Repeat true value 1, 3 times cause currently ctm 12 cols
                  apply(pointestall, 2, sd),
                  sqrt(colMeans(varestall)),
-                 apply(pointestall, 2, var) + (colMeans(pointestall) - rep(input_coef,m))^2, # MSE
+                 sqrt(apply(pointestall, 2, var) + (colMeans(pointestall) - rep(input_coef,m))^2), # RMSE
                  100*sqrt(colMeans(varestall)/nrow(pointestall)),    # 100*MCE
                  colMeans(coverageall),
                  colMeans(powerall))
 vec <- c('_Vlogi_slm', '_Dlogi_slm', '_VlogiDlogi_slm', '_unweighted_slm')
 rownames(results) <- c(paste0("Cox_Outcome", vec), paste0("Case_base_Outcome", vec))
-colnames(results) <- c('Mean', 'Bias', 'SD', 'Mean SE', 'MSE', '100xMCE', 'Coverage', 'Power')
+colnames(results) <- c('Mean', 'Bias', 'SD', 'Mean SE', 'RMSE', '100xMCE', 'Coverage', 'Power')
 round(results, 3)
 write.table(round(results, 3), file=file.path(outpath, 'SLM_1000_sim4_A0'))
 
@@ -184,13 +184,13 @@ write.table(round(results, 3), file=file.path(outpath, 'SLM_1000_sim4_A0'))
 results2 <- cbind(colMeans(pointestall2),
                   colMeans(pointestall2) - rep(input_coef2,m), # Bias # Repeat true value 1, 3 times cause currently ctm 12 cols
                   apply(pointestall2, 2, sd),
-                  sqrt(colMeans(varestall2)),
-                  apply(pointestall2, 2, var) + (colMeans(pointestall2) - rep(input_coef2,m))^2, # MSE
+                  sqrt(colMeans(varestall2)), 
+                  sqrt(apply(pointestall2, 2, var) + (colMeans(pointestall2) - rep(input_coef2,m))^2), # RMSE
                   100*sqrt(colMeans(varestall2)/nrow(pointestall2)),    # 100*MCE
                   colMeans(coverageall2),
                   colMeans(powerall2))
 vec <- c('_Vlogi_slm', '_Dlogi_slm', '_VlogiDlogi_slm', '_unweighted_slm')
 rownames(results2) <- c(paste0("Cox_Outcome", vec), paste0("Case_base_Outcome", vec))
-colnames(results2) <- c('Mean', 'Bias', 'SD', 'Mean SE', 'MSE', '100xMCE', 'Coverage', 'Power')
+colnames(results2) <- c('Mean', 'Bias', 'SD', 'Mean SE', 'RMSE', '100xMCE', 'Coverage', 'Power')
 round(results2, 3)
 write.table(round(results2, 3), file=file.path(outpath, 'SLM_1000_sim4_A2'))

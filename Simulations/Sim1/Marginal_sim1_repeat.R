@@ -122,7 +122,7 @@ results <- cbind(colMeans(pointestall),
                  colMeans(pointestall) - rep(input_coef,m), # Bias # Repeat 0.7 true value 3 times cause currently ctm 3 cols
                  apply(pointestall, 2, sd),
                  sqrt(colMeans(varestall)),                          # Mean SE
-                 100*(apply(pointestall, 2, var) + (colMeans(pointestall) - rep(input_coef,m))^2), # 100*MSE
+                 sqrt(apply(pointestall, 2, var) + (colMeans(pointestall) - rep(input_coef,m))^2), # RMSE
                  100*sqrt(colMeans(varestall)/nrow(pointestall)),    # 100*MCE
                  colMeans(coverageall),
                  colMeans(powerall))
@@ -133,6 +133,6 @@ vec <- c('_poi_ctm', '_cox_ctm', '_unweighted_ctm')
 rownames(results) <- c(paste0("Case_base_Outcome", vec))
 #rownames(results) <- c(paste0("Cox_Outcome", vec), paste0("Case_base_Outcome", vec))
 #colnames(results) <- c('Mean', 'SD', 'Mean SE', '100xMCE', 'Power')
-colnames(results) <- c('Mean', 'Bias', 'SD', 'Mean SE', '100xMSE', '100xMCE', 'Coverage', 'Power')
+colnames(results) <- c('Mean', 'Bias', 'SD', 'Mean SE', 'RMSE', '100xMCE', 'Coverage', 'Power')
 round(results, 3)
 write.table(round(results, 3), file=file.path(outpath, 'CTM_1000_results_sim1'))
