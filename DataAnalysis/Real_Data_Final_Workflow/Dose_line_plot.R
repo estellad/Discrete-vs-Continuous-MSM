@@ -32,7 +32,7 @@ plot_dose_line_all <- function(Dinit, dat_expo, string){
   
   title("Patient Percentage in Each Dose Category Over Time")
   legend(270, 0.7, legend=c('Unexposed', 
-                            "0<daily dose <= 5mg", 
+                            "0 < daily dose <= 5mg", 
                             "5 < daily dose <= 10mg", 
                             "10 < daily dose < 30mg",
                             "30 <= daily dose < 50mg", 

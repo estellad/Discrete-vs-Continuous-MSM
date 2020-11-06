@@ -158,7 +158,7 @@ cb <- cb[!is.na(cb$Start), ]
 
 #View(cb[cb$End != cb$Endcurious, ])
 # Can merge in baseline long, but let's wait 
-cb$futime <- cb$End - cb$Start              # non-universal futime, because discrete expo model
+cb$futime <- sum(ftime)/ms                              # universal futime
 cb$fiveinterval <- findInterval(cb$End, c(0, dtimes_V)) # TODO: replace cycle with fiveinterval
 
 # label Visit
