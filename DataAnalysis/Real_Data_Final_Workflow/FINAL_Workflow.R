@@ -71,7 +71,7 @@ modelnames <- c('Dose Level Model', 'Cumulative Dose Model', 'Flexible Cumulativ
 #whichmodel <- 'Dose Level Model' 
 whichmodel <- NA
 source("/users/edong/Code/Hazard_over_time_plt.R", echo=T) 
-
+source("/users/edong/Code/Hazard_over_time_plt_smooth.R", echo=T) 
 
 
 
