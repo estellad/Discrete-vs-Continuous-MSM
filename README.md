@@ -1,6 +1,6 @@
 #### Note: additional analyses are under development.
 
-# Fully-Continuous-MSM-MPP: 
+# Discrete-vs-Continuous-MSM: 
 
 <img align = "right" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/AnalysisDesign/fake_data_visual.png" width=500>
 
