@@ -2,7 +2,7 @@
 
 # Discrete-vs-Continuous-MSM: 
 
-<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/AnalysisDesign/fake_data_visual.png" width=500>
+<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/AnalysisDesign/fake_data_visual.png" width=500>
 
 Clinical visits on a discrete-time scale introduce missing data problems, while pharmacy dispensations from administrative data are naturally continuous due to the record linkage feature and can thus avoid such a situation. For many longitudinal pharmacoepidemiological studies, treatment episode construction and dealing with time-varying exposure and confounders are fundamental challenges. We propose the novel method of modeling the dispensation pattern through a stochastic process: marked point process (MPP), and we handle the time-varying confounders through inverse probability treatment weighting. 
 
@@ -21,7 +21,7 @@ Under `Simulation/`, we have four independent simulation scenarios, but they sha
 &nbsp;
 
 ## Simulation 
-<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Simulation_Design_DAGs.png" width=800>
+<img src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/Simulation_Design_DAGs.png" width=800>
 We present both the directed acyclic graph (DAG) in discrete-time and the multistate model diagram in continuous-time to demonstrate the simulation design. 
 
 ### The four simulation scenarios
@@ -30,25 +30,25 @@ We present both the directed acyclic graph (DAG) in discrete-time and the multis
 A scenario that patients all start unexposed, and then start the treatment at some individual-specific time point. <img src="https://latex.codecogs.com/gif.latex?A_i(t)"/> or <img src="https://latex.codecogs.com/gif.latex?A_{ik}"/> can be interpret as a treatment initiation process, in continuous and discrete time, respectively. <img src="https://latex.codecogs.com/gif.latex?X_i(t)"/> or <img src="https://latex.codecogs.com/gif.latex?X_{ik}"/> is the confounder process, and *Y* is the time-to-event outcome. 
 
 We start with state 1, and then depending on the treatment or confounder or event process taken, the individual can move across different states within administrative censoring of 5 years, with probabilities specified in a transition matrix. 
-<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim1_multistate.png" width=300>
+<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/Sim1_multistate.png" width=300>
 
 For simualtion 1 and 2, we have the below cross tabulation of exposure weighting and outcome MSM model combinations:
-<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim12_crosstab.png" width=500>
+<img src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/Sim12_crosstab.png" width=500>
 
 #### Simulation 2: treatment stop
 In scenario 2, we simulate a reversed situation of scenario 1. With the new-user cohort design of interest, we have <img src="https://latex.codecogs.com/gif.latex?A_i(0) = a_{i0} = 1"/> so that everyone starts exposed, and then a change in visit status results in a stop of treatment.
 
-<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim234_multistate.png" width=250>
+<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/Sim234_multistate.png" width=250>
 
 #### Simulation 3: treatment stop, model as logistic single visit MPP
 Similar to the second scenario, all patients start with being on treatment, but we separate the modeling of exposure process <img src="https://latex.codecogs.com/gif.latex?A_i(t)"/> into a visit process <img src="https://latex.codecogs.com/gif.latex?V_i(t)"/> that induces the corresponding treatment assignment indicator <img src="https://latex.codecogs.com/gif.latex?D_i(t)"/>, where the dosage level is binary, indicating treatment stopping or continuation on the same treatment. 
 
 For simualtion 3 and 4, we have the below cross tabulation of model combinations:
-<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Sim34_crosstab.png" width=500>
+<img src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/Sim34_crosstab.png" width=500>
 
 For MPP, the combined weights is the product of stabilized weights from the visiting and dosage models. 
 
-<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/combined_sw_sim.png" width=250>
+<img src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/combined_sw_sim.png" width=250>
 
 #### Simulation 4: treatment stop, model as a multinomial single visit MPP
 
@@ -58,7 +58,7 @@ Similar to the second and third scenario, all patients start with on treatment, 
 The main simulation parameters can be changed in the `helper_.R` files under each scenario. We require keeping the discrete and continuous-time parameters the same for the sake of comparison. As a summary of the simulation parameters used in the above four scenarios, we have 
 
 <p align="center">
-  <img width=500 src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/SimulationDesign/Simulation_Parameters.png">
+  <img width=500 src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/Simulation_Parameters.png">
 </p>
 
 ### Result
@@ -67,7 +67,7 @@ Simulation results are presented in tables. The mean, variance, MSE, coverage, a
 &nbsp;
 
 ## Data Analysis
-<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/AnalysisDesign/analysis_approach.png" width=500>
+<img align = "right" src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/AnalysisDesign/analysis_approach.png" width=500>
 The simulation methods are further developed and demonstrated in a new chronic glucocorticoid user cohort study over a 20-year period, with two time-dependent confounders - long-term-care (LTC) residency and bisphosphonate (BP) therapy duration. The outcome of interest is time-to-fracture. For exposure data, given the large sample size (86,842 patients) and the requirement of long-format dataset (split each individual's follow-up period by ordered person-times from all patients) in longitudinal survival analysis, we decide to use a discrete approximation of a five-day interval for slicing. The visit status are coded if there is a dose level change.
 
 #### Requirement
@@ -92,7 +92,7 @@ We can then fit the outcome models by `Outcome_models.R`, and return the outcome
 ### Weighting
 The combined weighting function is the cumulative product of stabilized (marginal divided by conditional) weights from the intial dose assignment, the subsequent visiting, and the subsequent dose assignment model. Depending on if an individual is getting a new dispensation during follow-up, the visiting and dosage weights can be muted, but the baseline weights always exist.
 
-<img src="https://raw.githubusercontent.com/EstellaD/Fully-Continuous-MSM-MPP/master/DesignFigures/AnalysisDesign/combined_sw.png" width=500>
+<img src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/AnalysisDesign/combined_sw.png" width=500>
 
 ### Result
 After using weighting to remove time-dependent confounders, several baseline characteristics are predictive for fracture. In terms of potential hazard under always treated with each dose level, 30-50mg daily has the highest impact on fracture. The impact of GC on fracture has the steepest escalation during the first 30 days and starts to reach a plateau after 3 months, with a slight increase near the end of the one year follow-up.
