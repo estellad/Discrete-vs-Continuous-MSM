@@ -1,4 +1,3 @@
-#### Note: additional analyses are under development.
 
 # Discrete-vs-Continuous-MSM: 
 
