@@ -35,7 +35,7 @@ For simualtion 1 and 2, we have the below cross tabulation of exposure weighting
 <img src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/Sim12_crosstab.png" width=500>
 
 #### Simulation 2: treatment stop
-In scenario 2, we simulate a reversed situation of scenario 1. With the new-user cohort design of interest, we have <img src="https://latex.codecogs.com/gif.latex?A_i(0) = a_{i0}"/> = 1 so that everyone starts exposed, and then a change in visit status results in a stop of treatment.
+In scenario 2, we simulate a reversed situation of scenario 1. With the new-user cohort design of interest, we have <img src="https://latex.codecogs.com/gif.latex?A_i(0)"/> = <img src="https://latex.codecogs.com/gif.latex?a_{i0}"/> = 1 so that everyone starts exposed, and then a change in visit status results in a stop of treatment.
 
 <img align = "right" src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/Sim234_multistate.png" width=250>
 
