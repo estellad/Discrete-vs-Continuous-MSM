@@ -1,3 +1,5 @@
+Full text: 
+[Continuous-time Marginal Structural Models for Adverse Drug Effects in Pharmacoepidemiology](https://www.proquest.com/docview/2508907825?pq-origsite=gscholar&fromopenview=true&sourcetype=Dissertations%20&%20Theses)
 
 # Discrete-vs-Continuous-MSM: 
 
@@ -26,7 +28,7 @@ We present both the directed acyclic graph (DAG) in discrete-time and the multis
 ### The four simulation scenarios
 
 #### Simulation 1: treatment initiation
-A scenario that patients all start unexposed, and then start the treatment at some individual-specific time point. <img src="https://latex.codecogs.com/gif.latex?A_i(t)"/> or <img src="https://latex.codecogs.com/gif.latex?A_{ik}"/> can be interpret as a treatment initiation process, in continuous and discrete time, respectively. <img src="https://latex.codecogs.com/gif.latex?X_i(t)"/> or <img src="https://latex.codecogs.com/gif.latex?X_{ik}"/> is the confounder process, and *Y* is the time-to-event outcome. 
+A scenario that patients all start unexposed, and then start the treatment at some individual-specific time point. $A_i(t)$ or $A_{ik}$ can be interpret as a treatment initiation process, in continuous and discrete time, respectively. $X_i(t)$ or $X_{ik}$ is the confounder process, and $Y$ is the time-to-event outcome. 
 
 We start with state 1, and then depending on the treatment or confounder or event process taken, the individual can move across different states within administrative censoring of 5 years, with probabilities specified in a transition matrix. 
 <img align = "right" src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/Sim1_multistate.png" width=300>
@@ -35,12 +37,12 @@ For simualtion 1 and 2, we have the below cross tabulation of exposure weighting
 <img src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/Sim12_crosstab.png" width=500>
 
 #### Simulation 2: treatment stop
-In scenario 2, we simulate a reversed situation of scenario 1. With the new-user cohort design of interest, we have <img src="https://latex.codecogs.com/gif.latex?A_i(0)"/> = <img src="https://latex.codecogs.com/gif.latex?a_{i0}"/> = 1 so that everyone starts exposed, and then a change in visit status results in a stop of treatment.
+In scenario 2, we simulate a reversed situation of scenario 1. With the new-user cohort design of interest, we have $A_i(0)$ = $a_{i0}$ = 1 so that everyone starts exposed, and then a change in visit status results in a stop of treatment.
 
 <img align = "right" src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/Sim234_multistate.png" width=250>
 
 #### Simulation 3: treatment stop, model as logistic single visit MPP
-Similar to the second scenario, all patients start with being on treatment, but we separate the modeling of exposure process <img src="https://latex.codecogs.com/gif.latex?A_i(t)"/> into a visit process <img src="https://latex.codecogs.com/gif.latex?V_i(t)"/> that induces the corresponding treatment assignment indicator <img src="https://latex.codecogs.com/gif.latex?D_i(t)"/>, where the dosage level is binary, indicating treatment stopping or continuation on the same treatment. 
+Similar to the second scenario, all patients start with being on treatment, but we separate the modeling of exposure process $A_i(t)$ into a visit process $V_i(t)$ that induces the corresponding treatment assignment indicator $D_i(t)$, where the dosage level is binary, indicating treatment stopping or continuation on the same treatment. 
 
 For simualtion 3 and 4, we have the below cross tabulation of model combinations:
 <img src="https://raw.githubusercontent.com/EstellaD/Discrete-vs-Continuous-MSM/master/DesignFigures/SimulationDesign/Sim34_crosstab.png" width=500>
@@ -51,7 +53,7 @@ For MPP, the combined weights is the product of stabilized weights from the visi
 
 #### Simulation 4: treatment stop, model as a multinomial single visit MPP
 
-Similar to the second and third scenario, all patients start with on treatment, with some initial dose <img src="https://latex.codecogs.com/gif.latex?D_{i0}"/> sampled from a logistic model. We also separate the modelling of <img src="https://latex.codecogs.com/gif.latex?A_i(t)"/> into <img src="https://latex.codecogs.com/gif.latex?V_i(t)"/> and <img src="https://latex.codecogs.com/gif.latex?D_i(t)"/>, but we extend the dosage level to three categories, indicating stop treatment, or continue on the same treatment or change to a higher dose treatment. We use a multinomial model for the modeling of <img src="https://latex.codecogs.com/gif.latex?D_i(t)"/>. 
+Similar to the second and third scenario, all patients start with on treatment, with some initial dose $D_i(i0)$ sampled from a logistic model. We also separate the modelling of $A_i(t)$ into $V_i(t)$ and $D_i(t)$, but we extend the dosage level to three categories, indicating stop treatment, or continue on the same treatment or change to a higher dose treatment. We use a multinomial model for the modeling of $D_i(t)$. 
 
 ### Simulation parameters
 The main simulation parameters can be changed in the `helper_.R` files under each scenario. We require keeping the discrete and continuous-time parameters the same for the sake of comparison. As a summary of the simulation parameters used in the above four scenarios, we have 
